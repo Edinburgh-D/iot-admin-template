@@ -1,71 +1,93 @@
-:root {
+/* src/style.css */
+
+/* 1. 引入 Tailwind CSS 的基本指令 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. 重置或自定义一些全局样式，但尽量避免与 Tailwind 冲突 */
+
+/* 移除 Vite 默认的 body 居中样式，让页面内容从顶部开始 */
+body {
+  margin: 0; /* 确保 body 没有默认外边距 */
+  /* min-width: 320px; 保持最小宽度 */
+  min-height: 100vh; /* 确保 body 至少占据整个视口高度 */
+  /* display: flex; place-items: center; 这些应该移除，否则会居中所有内容 */
+  /* background-color 和 color 也最好移除，让 Tailwind 或组件样式来控制 */
+  /* font-family 等可以保留，作为全局字体基线 */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* color-scheme 和 background-color, color 移除或设置为透明，让 Tailwind 类控制 */
+  /* color: #213547; */
+  /* background-color: #ffffff; */
 }
 
+/* 确保 #app 占据全部可用空间 */
+#app {
+  min-height: 100vh; /* 确保 App 也能撑满视口高度 */
+  width: 100%; /* 确保 App 占据全部宽度 */
+  /* text-align: center; color: #2c3e50; margin-top: 60px; 这些通常是默认的，移除 */
+  /* 应该让组件本身决定自己的样式 */
+}
+
+
+/* 3. 可以保留一些通用的全局链接样式（如果 Tailwind 的默认 link 样式不满足） */
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: theme('colors.blue.600'); /* 使用 Tailwind 的颜色变量，确保一致性 */
+  text-decoration: none; /* 默认不带下划线，可以根据需要调整 */
+  transition: color 0.2s ease-in-out; /* 添加过渡效果 */
 }
 a:hover {
-  color: #535bf2;
+  color: theme('colors.blue.800'); /* 鼠标悬停时的颜色 */
+  text-decoration: underline; /* 鼠标悬停时显示下划线 */
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+/* 4. 对于 H1 等标题，建议直接在组件中使用 Tailwind 类 */
+/* 比如 <h1 class="text-3xl font-bold text-gray-800">标题</h1> */
+/* 如果确实需要一个全局 H1 样式，可以这样写（但通常不推荐覆盖 Tailwind 基础样式） */
+/* h1 {
+  @apply text-4xl font-extrabold text-gray-800;
+} */
+
+
+/* 5. 按钮样式也强烈建议通过 Tailwind 类在组件中定义 */
+/* 如果要强制一个全局按钮样式，请慎重考虑，并且使用 @apply */
+/* button {
+  @apply px-4 py-2 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+} */
+
+
+/* 6. 其他你想全局应用的基础样式 */
+/* 例如，图片的最大宽度 */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* 滚动条样式 (可选，跨浏览器兼容性可能不完美) */
+/* ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
+::-webkit-scrollbar-thumb {
+  background-color: theme('colors.gray.400');
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background-color: theme('colors.gray.200');
+} */
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
-.card {
+/* 可以移除 Vite 默认的 `card` 类，因为这应该在组件中用 Tailwind 类定义 */
+/* .card {
   padding: 2em;
-}
+} */
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
 
-@media (prefers-color-scheme: light) {
+/* 移除媒体查询的 light/dark 模式切换，让 Tailwind 处理颜色主题或手动切换 */
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -76,4 +98,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
