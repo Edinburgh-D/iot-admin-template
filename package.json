@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.ts,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3"
   },
